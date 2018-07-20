@@ -1,51 +1,56 @@
 import React from 'react';
 import $ from 'jquery';
-import songs from '../../sampleData.js'
+import songs from '../../../sampleData.js';
 
-class VideoPlayer extends React.Component {
+class MusicPlayer extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      currentSong: songs[0]
+    };
+  }
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			currentSong: 1
-		}
-	}
+  componentDidMount () {
+    this.getSongData();
+  }
 
-	playButtonHandler() {
-		// plays a static song
-	}
+  getSongData () {
+    // GET request to fetch song data
 
+  }
 
-	artistClickHandler() {
-		// goes to a static a static artist page
-	}
+  playButtonHandler () {
+    // plays a static song
+    this.state = this.state;
+  }
 
+  artistClickHandler () {
+    // goes to a static a static artist page
+    this.state = this.state;
+  }
 
-	albumClickHandler() {
-		// goes to a static album page
-	}
+  albumClickHandler () {
+    // goes to a static album page
+    this.state = this.state;
+  }
 
-	genreClickHandler() {
-		// goes to a static genre page
-	}
+  genreClickHandler () {
+    // goes to a static genre page
+    this.state = this.state;
+  }
 
-	albumArtClickHandler() {
-		// pops up the album art
-	}
+  albumArtClickHandler () {
+    // pops up the album art
+    this.state.currentSong = 1;
+  }
 
-	getSongData() {
-		// GET request to fetch song data
-	}
-
-	componentDidMount() {
-		getSongData();
-
-	}
-
-	render() {
-		return <div>This is the video player</div>
-	}
-
+  render () {
+    return (
+      <div>
+        This is the music player
+      </div>
+    );
+  }
 }
 
 export default MusicPlayer;
