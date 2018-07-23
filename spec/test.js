@@ -16,6 +16,7 @@ beforeAll(async () => {
   page = await browser.newPage();
   await page.setViewport({ width, height });
 });
+
 afterAll(() => {
   browser.close();
 });
@@ -23,5 +24,5 @@ afterAll(() => {
 describe('MusicPlayer component', () => {
   test('trial run', () => {
 
-  });  
+  });
 });
