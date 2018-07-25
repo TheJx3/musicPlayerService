@@ -21,8 +21,8 @@
 //   browser.close();
 // });
 
-// describe('MusicPlayer component', () => {
-//   test('trial run', () => {
+describe('MusicPlayer component', () => {
+  test('trial run', () => {
 
-//   });
-// });
+  });
+});
