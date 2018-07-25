@@ -19,7 +19,6 @@
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
-    "jest": "^23.4.1",
     "jquery": "^3.3.1",
     "mongodb": "^3.1.1",
     "react": "^16.4.1",
@@ -28,6 +27,8 @@
   },
   "devDependencies": {
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "jest": "^23.4.1",
+    "puppeteer": "^1.6.0",
     "webpack": "^4.16.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.4"

@@ -16,7 +16,7 @@ class MusicPlayer extends React.Component {
 
   getSongData () {
     // GET request to fetch song data
-
+    
   }
 
   playButtonHandler () {
