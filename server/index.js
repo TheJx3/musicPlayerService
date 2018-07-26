@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-// const data = require('../sampleData.js');
+const data = require('../sampleData.js');
 const db = require('../database/index.js');
 
 const app = express();
@@ -22,18 +22,21 @@ app.get('/api/songs/:songId', (req, res) => {
   console.log('this is the req.params.songId: ', req.params.songId);
   db.getSong(null, req.params.songId, (err, data) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
       res.send(data);
     }
-  })
+  });
 });
+
 
 app.listen(port, () => console.log(`Your server has connected and is listening on port: ${port}!!`));
 
   // used to populate the db
-  // for (let i = 0; i < data.songs.length; i++) {
-    // db.save(null, data.songs[i]);
-  //   console.log(data.songs[i])
-  // }  
-
+// app.get('/api/dbSave', (req, res) => {
+//   for (let i = 0; i < data.songs.length; i++) {
+//     db.save(null, data.songs[i]);
+//     console.log(data.songs[i])
+//   }  
+//   res.send('Great Success!!!')
+// })

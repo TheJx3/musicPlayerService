@@ -6,13 +6,17 @@ const connection = mongoose.connect('mongodb://localhost/musicPlayer', { useMong
 console.log('GRRRREEAAAAT SUCCESSSSS!!!!!');
 
 const songSchema = mongoose.Schema({
-  id: {
-    type: Number, unique: true, required: true, dropDups: true
-  },
+  _id: Number,
   title: String,
   artist: String,
+  genre: String,
   album: String,
-  genre: String
+  albumArt: String,
+  createdAt: Number,
+  plays: Number,
+  likes: Number,
+  shares: Number,
+  comments: Number
 });
 
 const Song = mongoose.model('Song', songSchema);
