@@ -19,7 +19,6 @@ app.get('/api/songs/:songId', (req, res) => {
 
 app.listen(port, () => console.log(`Your server has connected and is listening on port: ${port}!!`));
 
-
   // used to populate the db
   // for (let i = 0; i < data.songs.length; i++) {
   //   db.save(null, data.songs[i]);
