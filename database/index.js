@@ -18,6 +18,21 @@ const songSchema = mongoose.Schema({
 
 const Song = mongoose.model('Song', songSchema);
 
+const getSong = (err, songId, callback) => {
+  if (err) {
+    console.log(err);
+  } else {
+    Song.find({ id: songId }).exec((err, data) => {
+      if (err) {
+        console.log('this is in find by id', err);
+      } else {
+        console.log('this is data inside the db', data)
+        callback(null, data[0]);
+      }
+    });
+  }
+};
+
 const save = (err, inputSong) => {
   if (err) {
     console.log(err);
@@ -30,3 +45,4 @@ const save = (err, inputSong) => {
 };
 
 module.exports.save = save;
+module.exports.getSong = getSong;

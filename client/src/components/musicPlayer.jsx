@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import songs from '../../../sampleData.js';
 
@@ -11,12 +12,15 @@ class MusicPlayer extends React.Component {
   }
 
   componentDidMount () {
-    this.getSongData();
+    this.getSongData(69);
   }
 
-  getSongData () {
+  getSongData (songId) {
     // GET request to fetch song data
-    
+    $.get(`/api/songs/${songId}`, null, (data) => {
+      this.setState({ currentSong: data });
+      console.log(this.state.currentSong);
+    });
   }
 
   playButtonHandler () {
@@ -52,5 +56,7 @@ class MusicPlayer extends React.Component {
     );
   }
 }
+
+ReactDOM.render(<MusicPlayer />, document.getElementById('app'));
 
 export default MusicPlayer;
