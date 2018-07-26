@@ -842,5 +842,5 @@ const songs = [{
     "album": "Whenever You Need Sombeody"
 }];
 
-exports = songs;
+exports.songs = songs;
 
