@@ -14,7 +14,7 @@ class MusicPlayer extends React.Component {
         "genre": "Jazz",
        "album": "Whenever You Need Sombeody"
       },
-      currentSongId: 7,
+      currentSongId: 9,
       // currentSongTitle: null,
       // currentSongArtist: null, 
       // currentSongGenre: null,
@@ -30,6 +30,7 @@ class MusicPlayer extends React.Component {
     // GET request to fetch song data
     $.get(`/api/songs/${songId}`, null, (data) => {
       this.setState({ currentSongData: data });
+      document.title = this.state.currentSongData.title;
       console.log(this.state.currentSongData);
     });
   }
