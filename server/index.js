@@ -18,7 +18,6 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// respond with "hello world" when a GET request is made to the homepage
 app.get('/api/songs/:songId', (req, res) => {
   console.log('this is the req.params.songId: ', req.params.songId);
   db.getSong(null, req.params.songId, (err, data) => {

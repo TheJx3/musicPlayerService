@@ -6,7 +6,6 @@ const connection = mongoose.connect('mongodb://localhost/musicPlayer', { useMong
 console.log('GRRRREEAAAAT SUCCESSSSS!!!!!');
 
 const songSchema = mongoose.Schema({
-  // TODO: your schema here!
   id: {
     type: Number, unique: true, required: true, dropDups: true
   },
@@ -26,7 +25,7 @@ const getSong = (err, songId, callback) => {
       if (err) {
         console.log('this is in find by id', err);
       } else {
-        console.log('this is data inside the db', data)
+        console.log('this is data inside the db', data);
         callback(null, data[0]);
       }
     });

@@ -7,19 +7,30 @@ class MusicPlayer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      currentSong: songs[0]
+      currentSongData: {
+        "id": 1,
+        "title": "reprehenderit marfa quinoa bag",
+        "artist": "Rick Astley",
+        "genre": "Jazz",
+       "album": "Whenever You Need Sombeody"
+      },
+      currentSongId: 7,
+      // currentSongTitle: null,
+      // currentSongArtist: null, 
+      // currentSongGenre: null,
+      // currentSongAlbum: null,
     };
   }
 
   componentDidMount () {
-    this.getSongData(69);
+    this.getSongData(this.state.currentSongId);
   }
 
   getSongData (songId) {
     // GET request to fetch song data
     $.get(`/api/songs/${songId}`, null, (data) => {
-      this.setState({ currentSong: data });
-      console.log(this.state.currentSong);
+      this.setState({ currentSongData: data });
+      console.log(this.state.currentSongData);
     });
   }
 
@@ -51,7 +62,18 @@ class MusicPlayer extends React.Component {
   render () {
     return (
       <div>
-        This is the music player
+        <div>
+          Title: {this.state.currentSongData.title}
+        </div>
+        <div>
+          Artist: {this.state.currentSongData.artist}
+        </div>
+        <div>
+          Album: {this.state.currentSongData.album}
+        </div>
+        <div>
+          Genre: {this.state.currentSongData.genre}
+        </div>
       </div>
     );
   }
