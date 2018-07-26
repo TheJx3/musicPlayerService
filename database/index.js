@@ -25,7 +25,7 @@ const getSong = (err, songId, callback) => {
   if (err) {
     console.log(err);
   } else {
-    Song.find({ id: songId }).exec((err, data) => {
+    Song.find({ _id: songId }).exec((err, data) => {
       if (err) {
         console.log('this is in find by id', err);
       } else {
