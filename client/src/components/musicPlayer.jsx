@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import styled from 'styled-components';
-// import songs from '../../../sampleData.js';
+
 
 const MusicPlayerContainer = styled.div`
   display: flex;
   flex-direction: row; 
+  justify-content: flex-end;
   background: linear-gradient(135deg, #4D586E, #3A67C0);
   height: 340px;
   width: 1200px;
@@ -16,18 +17,16 @@ const MusicPlayerContainer = styled.div`
   padding-left: 25px;
   padding-bottom: 15px;
   padding-right: 15px;
-  justify-content: space-between;
+`;
+
+const ButtonTitleContainer = styled.div`
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row; 
 `;
 
 const ButtonContainer = styled.div`
   padding-top: 20px;
-
-`;
-
-const ButtonTitleContainer = styled.div`
-padding-top: 20px;
-  display: flex;
-  flex-direction: row; 
 `;
 
 const TitleArtistContainer = styled.div`
@@ -41,7 +40,16 @@ const TitleArtistContainer = styled.div`
 const AlbumArtContainer = styled.div`
   width: 340px;
   height: 340px;
-  align-self: center;
+`;
+
+const GenreCreatedContainer = styled.div`
+  margin-left: auto;
+  margin-right: 20px;
+  flex-direction: column;
+`;
+
+const GenreContainer = styled.div`
+  flex-direction: row;
 `;
 
 const playButton = (<span className="fa-stack">
@@ -53,25 +61,54 @@ const Artist = styled.span`
   background-color: black;
   font-size: 16px;
   color: #ccc;
-    padding-top: 2px;
-    padding-right: 7px;
-    padding-bottom: 3px;
-    padding-left: 7px;
+  padding-top: 2px;
+  padding-right: 7px;
+  padding-bottom: 3px;
+  padding-left: 7px;
 `;
 
 const Album = styled.span`
   background-color: black;
   font-size: 16px;
   color: #ccc;
-    line-height: 1;
-    padding-top: 2px;
-    padding-right: 7px;
-    padding-bottom: 3px;
-    padding-left: 7px;
+  line-height: 1;
+  padding-top: 2px;
+  padding-right: 7px;
+  padding-bottom: 3px;
+  padding-left: 7px;
+`;
+
+const Genre = styled.span`
+  background: #999;
+  font-size: 14px;
+  color: #fff;
+  border-radius:20px;
+  border-top-color: rgb(153, 153, 153);
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-right-color: rgb(153, 153, 153);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-bottom-color: rgb(153, 153, 153);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: rgb(153, 153, 153);
+  border-left-style: solid;
+  border-left-width: 0;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  padding-top: 0px;
+  padding-right: 7px;
+  padding-bottom: 0px;
+  padding-left: 7px;
 `;
 
 const AlbumArt = styled.img`
-
+  width: 340px;
+  height: 340px;
 `;
 
 const Title = styled.span`
@@ -79,26 +116,24 @@ const Title = styled.span`
   font-size: 24px;
   color: white;
   line-height: 2.1;
-    padding-top: 4px;
-    padding-right: 7px;
-    padding-bottom: 4px;
-    padding-left: 7px;
+  padding-top: 4px;
+  padding-right: 7px;
+  padding-bottom: 4px;
+  padding-left: 7px;
 `;
-
-
 
 class MusicPlayer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       currentSongData: {
-        "id": 1,
-        "title": "reprehenderit marfa quinoa bag",
-        "artist": "Rick Astley",
-        "genre": "Jazz",
-        "album": "Whenever You Need Sombeody"
+        id: 1,
+        title: 'reprehenderit marfa quinoa bag',
+        artist: 'Rick Astley',
+        genre: 'Jazz',
+        album: 'Whenever You Need Sombeody'
       },
-      currentSongId: 9,
+      currentSongId: 1
     };
   }
 
@@ -111,7 +146,7 @@ class MusicPlayer extends React.Component {
     $.get(`/api/songs/${songId}`, null, (data) => {
       this.setState({ currentSongData: data });
       document.title = this.state.currentSongData.title;
-      // console.log(this.state.currentSongData);
+      console.log(this.state.currentSongData);
     });
   }
 
@@ -165,12 +200,15 @@ class MusicPlayer extends React.Component {
             </div>
           </TitleArtistContainer>
         </ButtonTitleContainer>
-
-        <div>
-          Genre: {this.state.currentSongData.genre}
-        </div>
+        <GenreCreatedContainer>
+          <GenreContainer>
+            <Genre>
+              #{this.state.currentSongData.genre}
+            </Genre>
+          </GenreContainer>
+        </GenreCreatedContainer>  
         <AlbumArtContainer>
-          <AlbumArt src='http://via.placeholder.com/340x340'></AlbumArt>
+          <AlbumArt src={`https://s3-us-west-1.amazonaws.com/streamboard-album-art/${this.state.currentSongData.albumArt}`}></AlbumArt>
         </AlbumArtContainer>
       </MusicPlayerContainer>
     );

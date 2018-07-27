@@ -29,14 +29,10 @@ app.get('/api/songs/:songId', (req, res) => {
   });
 });
 
-
 app.listen(port, () => console.log(`Your server has connected and is listening on port: ${port}!!`));
 
-  // used to populate the db
+// used to populate the db
 // app.get('/api/dbSave', (req, res) => {
-//   for (let i = 0; i < data.songs.length; i++) {
-//     db.save(null, data.songs[i]);
-//     console.log(data.songs[i])
-//   }  
-//   res.send('Great Success!!!')
-// })
+//   db.save(null, data.songs[0]);
+//   res.send(data.songs[0]);
+// });
