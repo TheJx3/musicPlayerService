@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import styled from 'styled-components';
+import Moment from 'react-moment';
 
 const MusicPlayerContainer = styled.div`
   display: flex;
@@ -252,7 +253,7 @@ class MusicPlayer extends React.Component {
         </ButtonTitleContainer>
         <GenreCreatedContainer>
           <GenreContainer>
-            <CreatedAt>X Months Ago</CreatedAt>
+            <CreatedAt><Moment fromNow>{this.state.currentSongData.createdAt}</Moment></CreatedAt>
             <Genre>
               # {this.state.currentSongData.genre}
             </Genre>
