@@ -10,6 +10,24 @@ module: {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       use: ['babel-loader']
+    },
+    {
+      test: /\.(png|jpg|gif)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name (file) {
+              /*if (env === 'development') {
+                return '[path][name].[ext]'
+            }*/
+              return '[name]_[hash].[ext]'
+            },
+            publicPath: '/assets/images/',
+            outputPath: '../images/'
+          }  
+        }
+      ]
     }
   ]
 },
