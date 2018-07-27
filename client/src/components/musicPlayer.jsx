@@ -25,16 +25,39 @@ const ButtonTitleContainer = styled.div`
   flex-direction: row; 
 `;
 
-const ButtonContainer = styled.div`
-  padding-top: 20px;
-`;
-
 const TitleArtistContainer = styled.div`
-  padding-left: 40px;
+  padding-left: 10px;
   display: flex;
   flex-direction: column; 
   width: 400px;
   font-weight: 100;
+`;
+
+const PlayButtonContainer = styled.div`
+  justify-content: flex-start;
+  border-radius: 50%;
+  border-color: #FF5836;
+  background: #FF5836;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  &:hover {
+    background: #FF4137;
+  }
+`;
+const PlayButton = styled.img`
+  margin-left: 7px;
+  margin-top: 4px;
+  width: 50px;
+  height: 50px;
+`;
+
+const ArtistContainer = styled.div`
+  
+`;
+
+const AlbumContainer = styled.div`
+  
 `;
 
 const AlbumArtContainer = styled.div`
@@ -46,16 +69,18 @@ const GenreCreatedContainer = styled.div`
   margin-left: auto;
   margin-right: 20px;
   flex-direction: column;
+  font-size: 16px;
+`;
+
+const CreatedAt = styled.div`
+  margin-top: 16px;
+  margin-bottom: 16px;
 `;
 
 const GenreContainer = styled.div`
   flex-direction: row;
+  text-align: right;
 `;
-
-const playButton = (<span className="fa-stack">
-    <i className="fa fa-circle fa-stack-1x circle-bg"></i>
-    <i className="fa fa-play-circle fa-stack-1x icon-b"></i>
-</span>);
 
 const Artist = styled.span`
   background-color: black;
@@ -65,6 +90,10 @@ const Artist = styled.span`
   padding-right: 7px;
   padding-bottom: 3px;
   padding-left: 7px;
+  cursor: pointer;
+  ${ArtistContainer}:hover &{
+    color: white;
+  }
 `;
 
 const Album = styled.span`
@@ -76,12 +105,16 @@ const Album = styled.span`
   padding-right: 7px;
   padding-bottom: 3px;
   padding-left: 7px;
+  cursor: pointer;
+  ${AlbumContainer}:hover &{
+    color: white;
+  }
 `;
 
 const Genre = styled.span`
   background: #999;
-  font-size: 14px;
   color: #fff;
+  cursor: pointer;
   border-radius:20px;
   border-top-color: rgb(153, 153, 153);
   border-top-style: solid;
@@ -100,16 +133,21 @@ const Genre = styled.span`
   border-image-width: initial;
   border-image-outset: initial;
   border-image-repeat: initial;
-  padding-top: 0px;
+  padding-top: 2px;
   padding-right: 7px;
-  padding-bottom: 0px;
+  padding-bottom: 2px;
   padding-left: 7px;
+  ${GenreContainer}:hover &{
+    background: #666;
+    border-color: #666;
+  }
 `;
 
 const AlbumArt = styled.img`
   width: 340px;
   height: 340px;
 `;
+
 
 const Title = styled.span`
   background-color: black;
@@ -120,6 +158,7 @@ const Title = styled.span`
   padding-right: 7px;
   padding-bottom: 4px;
   padding-left: 7px;
+
 `;
 
 class MusicPlayer extends React.Component {
@@ -179,36 +218,37 @@ class MusicPlayer extends React.Component {
     return (
       <MusicPlayerContainer>
         <ButtonTitleContainer>
-          <ButtonContainer>
-            {playButton}
-          </ButtonContainer>
+          <PlayButtonContainer>
+            <PlayButton src='https://s3-us-west-1.amazonaws.com/streamboard98/icons/play.png'></PlayButton>
+          </PlayButtonContainer>
           <TitleArtistContainer>
-            <div>
+            <ArtistContainer>
               <Artist>
                 {this.state.currentSongData.artist}
               </Artist>
-            </div>
+            </ArtistContainer>
             <div>
               <Title>
                 {this.state.currentSongData.title}
               </Title>
             </div>
-            <div>
+            <AlbumContainer>
               <Album>
                 In album: {this.state.currentSongData.album}
               </Album>
-            </div>
+            </AlbumContainer>
           </TitleArtistContainer>
         </ButtonTitleContainer>
         <GenreCreatedContainer>
           <GenreContainer>
+            <CreatedAt>X Months Ago</CreatedAt>
             <Genre>
-              #{this.state.currentSongData.genre}
+              # {this.state.currentSongData.genre}
             </Genre>
           </GenreContainer>
         </GenreCreatedContainer>  
         <AlbumArtContainer>
-          <AlbumArt src={`https://s3-us-west-1.amazonaws.com/streamboard-album-art/${this.state.currentSongData.albumArt}`}></AlbumArt>
+          <AlbumArt src={`https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/${this.state.currentSongData.albumArt}`}></AlbumArt>
         </AlbumArtContainer>
       </MusicPlayerContainer>
     );
