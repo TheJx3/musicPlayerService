@@ -12,6 +12,7 @@ const songSchema = mongoose.Schema({
   genre: String,
   album: String,
   albumArt: String,
+  songFile: String,
   createdAt: Number,
   plays: Number,
   likes: Number,
@@ -46,7 +47,6 @@ const save = (err, inputSong) => {
     });
   }
 };
-
 
 module.exports.save = save;
 module.exports.getSong = getSong;
