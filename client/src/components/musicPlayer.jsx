@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import styled from 'styled-components';
 
-
 const MusicPlayerContainer = styled.div`
   display: flex;
   flex-direction: row; 
@@ -46,8 +45,8 @@ const PlayButtonContainer = styled.div`
   }
 `;
 const PlayButton = styled.img`
-  margin-left: 7px;
-  margin-top: 4px;
+  margin-left: 4.5px;
+  margin-top: 4.5px;
   width: 50px;
   height: 50px;
 `;
@@ -148,7 +147,6 @@ const AlbumArt = styled.img`
   height: 340px;
 `;
 
-
 const Title = styled.span`
   background-color: black;
   font-size: 24px;
@@ -170,28 +168,38 @@ class MusicPlayer extends React.Component {
         title: 'reprehenderit marfa quinoa bag',
         artist: 'Rick Astley',
         genre: 'Jazz',
-        album: 'Whenever You Need Sombeody'
+        album: 'Whenever You Need Sombeody',
+        albumArt: 'RickAstley_WheneverYouNeedSomebody.png',
+        songFile: 'RickAstley_NeverGonnaGiveYouUp.mp3'
       },
-      currentSongId: 1
+      currentSongId: 2,
+      play: false,
     };
+    this.playButtonHandler = this.playButtonHandler.bind(this);
   }
 
   componentDidMount () {
     this.getSongData(this.state.currentSongId);
-  }
+    console.log('this is the link', 'https://s3-us-west-1.amazonaws.com/streamboard98/music/' + this.state.currentSongData.songFile);
+    }
 
   getSongData (songId) {
     // GET request to fetch song data
     $.get(`/api/songs/${songId}`, null, (data) => {
       this.setState({ currentSongData: data });
       document.title = this.state.currentSongData.title;
-      console.log(this.state.currentSongData);
+      this.audio = new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/' + this.state.currentSongData.songFile);
     });
   }
 
   playButtonHandler () {
     // plays a static song
-    this.state = this.state;
+    this.setState({play: !this.state.play});
+    if (this.state.play === false) {
+      this.audio.play()
+    } else {
+      this.audio.pause()
+    }
   }
 
   artistClickHandler () {
@@ -215,11 +223,17 @@ class MusicPlayer extends React.Component {
   }
 
   render () {
+    let playButton;
+    if (this.state.play === false) {
+      playButton = 'https://s3-us-west-1.amazonaws.com/streamboard98/icons/play.png'
+    } else {
+      playButton = 'https://s3-us-west-1.amazonaws.com/streamboard98/icons/pause.png'
+    }
     return (
       <MusicPlayerContainer>
         <ButtonTitleContainer>
-          <PlayButtonContainer>
-            <PlayButton src='https://s3-us-west-1.amazonaws.com/streamboard98/icons/play.png'></PlayButton>
+          <PlayButtonContainer onClick={this.playButtonHandler}>
+            <PlayButton src={playButton}></PlayButton>
           </PlayButtonContainer>
           <TitleArtistContainer>
             <ArtistContainer>
