@@ -46,13 +46,18 @@ const PlayButtonContainer = styled.div`
 `;
 const PlayButton = styled.img`
   margin-left: 4.5px;
-  margin-top: 4.5px;
+  margin-top: 4px;
   width: 50px;
   height: 50px;
 `;
 
 const ArtistContainer = styled.div`
   
+`;
+
+const TitleContainer = styled.div`
+  margin-top: 4px;
+  margin-bottom: 4px;
 `;
 
 const AlbumContainer = styled.div`
@@ -151,7 +156,7 @@ const Title = styled.span`
   background-color: black;
   font-size: 24px;
   color: white;
-  line-height: 2.1;
+  line-height: 1.7;
   padding-top: 4px;
   padding-right: 7px;
   padding-bottom: 4px;
@@ -163,16 +168,8 @@ class MusicPlayer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      currentSongData: {
-        id: 1,
-        title: 'reprehenderit marfa quinoa bag',
-        artist: 'Rick Astley',
-        genre: 'Jazz',
-        album: 'Whenever You Need Sombeody',
-        albumArt: 'RickAstley_WheneverYouNeedSomebody.png',
-        songFile: 'RickAstley_NeverGonnaGiveYouUp.mp3'
-      },
-      currentSongId: 2,
+      currentSongData: {},
+      currentSongId: 3,
       play: false,
     };
     this.playButtonHandler = this.playButtonHandler.bind(this);
@@ -241,11 +238,11 @@ class MusicPlayer extends React.Component {
                 {this.state.currentSongData.artist}
               </Artist>
             </ArtistContainer>
-            <div>
+            <TitleContainer>
               <Title>
                 {this.state.currentSongData.title}
               </Title>
-            </div>
+            </TitleContainer>
             <AlbumContainer>
               <Album>
                 In album: {this.state.currentSongData.album}
