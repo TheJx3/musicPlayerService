@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Moment from 'react-moment';
+import AlbumModal from './albumModal.jsx';
 
 const MusicPlayerContainer = styled.div`
   display: flex;
@@ -62,12 +63,26 @@ const TitleContainer = styled.div`
 `;
 
 const AlbumContainer = styled.div`
-  
+  display: flex;
+  flex-direction: row
 `;
 
 const AlbumArtContainer = styled.div`
   width: 340px;
   height: 340px;
+  cursor: pointer;
+`;
+
+const ModalBackground = styled.div`
+  background-color: rgba(242,242,242,0.9);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const GenreCreatedContainer = styled.div`
@@ -85,6 +100,26 @@ const CreatedAt = styled.div`
 const GenreContainer = styled.div`
   flex-direction: row;
   text-align: right;
+`;
+
+const keyFrameExampleOne = keyframes`
+  0% {
+    height: 900px;
+  }
+  80% {
+    height: 580px;
+  }
+
+  100% {
+    height: 600px;
+  }
+`;
+
+const BlowUpContainer = styled.div`
+  background-color: white;
+  padding: 30px 30px 30px 30px;
+  flex-direction: column;
+  animation: ${keyFrameExampleOne} .1s ease-in-out 0s 1;
 `;
 
 const Artist = styled.span`
@@ -114,6 +149,14 @@ const Album = styled.span`
   ${AlbumContainer}:hover &{
     color: white;
   }
+`;
+
+const ModalTitle = styled.div`
+  padding: 0px 20px 15px 0px;
+  overflow: false;
+  border-bottom-color: rgba(242,242,242,1);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 `;
 
 const Genre = styled.span`
@@ -153,6 +196,18 @@ const AlbumArt = styled.img`
   height: 340px;
 `;
 
+const AlbumArtThumb = styled.img`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+`;
+
+const AlbumArtBlowUp = styled.img`
+padding-top 30px;
+  width: 500px;
+  height: 500px;
+`;
+
 const Title = styled.span`
   background-color: black;
   font-size: 24px;
@@ -170,10 +225,13 @@ class MusicPlayer extends React.Component {
     super(props);
     this.state = {
       currentSongData: {},
-      currentSongId: 3,
+      currentSongId: 10,
       play: false,
+      showModal: false
     };
     this.playButtonHandler = this.playButtonHandler.bind(this);
+    this.albumArtClickHandler = this.albumArtClickHandler.bind(this);
+    this.hideModalHandler = this.hideModalHandler.bind(this)
   }
 
   componentDidMount () {
@@ -217,10 +275,29 @@ class MusicPlayer extends React.Component {
 
   albumArtClickHandler () {
     // pops up the album art
-    this.state.currentSong = 1;
+    this.setState({ showModal: true });
+    console.log(this.state.showModal)
+  }
+
+  hideModalHandler() {
+    this.setState({ showModal: false })
   }
 
   render () {
+    const modal = this.state.showModal ? (
+      <AlbumModal>
+        <ModalBackground className='modal' onClick={this.hideModalHandler}>
+        <div>
+          <BlowUpContainer>
+            <ModalTitle>{this.state.currentSongData.title}</ModalTitle>
+            <AlbumArtBlowUp src={`https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/${this.state.currentSongData.albumArt}`} ></AlbumArtBlowUp>
+          </BlowUpContainer>
+        </div>
+        </ModalBackground>
+      </AlbumModal>
+    ) : null;
+
+
     let playButton;
     if (this.state.play === false) {
       playButton = 'https://s3-us-west-1.amazonaws.com/streamboard98/icons/play.png'
@@ -229,6 +306,7 @@ class MusicPlayer extends React.Component {
     }
     return (
       <MusicPlayerContainer>
+      {modal}
         <ButtonTitleContainer>
           <PlayButtonContainer onClick={this.playButtonHandler}>
             <PlayButton src={playButton}></PlayButton>
@@ -245,6 +323,7 @@ class MusicPlayer extends React.Component {
               </Title>
             </TitleContainer>
             <AlbumContainer>
+              <AlbumArtThumb src={`https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/${this.state.currentSongData.albumArt}`}></AlbumArtThumb>
               <Album>
                 In album: {this.state.currentSongData.album}
               </Album>
@@ -259,14 +338,12 @@ class MusicPlayer extends React.Component {
             </Genre>
           </GenreContainer>
         </GenreCreatedContainer>  
-        <AlbumArtContainer>
+        <AlbumArtContainer onClick={this.albumArtClickHandler}>
           <AlbumArt src={`https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/${this.state.currentSongData.albumArt}`}></AlbumArt>
         </AlbumArtContainer>
       </MusicPlayerContainer>
     );
   }
 }
-
-ReactDOM.render(<MusicPlayer />, document.getElementById('app'));
 
 export default MusicPlayer;
