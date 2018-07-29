@@ -3,6 +3,13 @@ body{
 
 }
 
+#albumModal {
+	position: relative;
+	z-index: 999;
+}
+
+
+
 /*{
 	color: #FF5836;
 	background: orange;
