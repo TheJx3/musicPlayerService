@@ -19,11 +19,15 @@ const MusicPlayerContainer = styled.div`
   padding-right: 15px;
 `;
 
+MusicPlayerContainer.displayName = 'MusicPlayerContainer';
+
 const ButtonTitleContainer = styled.div`
   padding-top: 20px;
   display: flex;
   flex-direction: row; 
 `;
+
+ButtonTitleContainer.displayName = 'ButtonTitleContainer';
 
 const TitleArtistContainer = styled.div`
   padding-left: 10px;
@@ -32,6 +36,8 @@ const TitleArtistContainer = styled.div`
   width: 400px;
   font-weight: 100;
 `;
+
+TitleArtistContainer.displayName = 'TitleArtistContainer';
 
 const PlayButtonContainer = styled.div`
   justify-content: flex-start;
@@ -45,6 +51,9 @@ const PlayButtonContainer = styled.div`
     background: #FF4137;
   }
 `;
+
+PlayButtonContainer.displayName = 'PlayButtonContainer'
+
 const PlayButton = styled.img`
   margin-left: 4.5px;
   margin-top: 4px;
@@ -52,25 +61,35 @@ const PlayButton = styled.img`
   height: 50px;
 `;
 
+PlayButton.displayName = 'PlayButton';
+
 const ArtistContainer = styled.div`
   
 `;
+
+ArtistContainer.displayName = 'ArtistContainer';
 
 const TitleContainer = styled.div`
   margin-top: 4px;
   margin-bottom: 4px;
 `;
 
+TitleContainer.displayName = TitleContainer;
+
 const AlbumContainer = styled.div`
   display: flex;
   flex-direction: row
 `;
+
+AlbumContainer.displayName = AlbumContainer;
 
 const AlbumArtContainer = styled.div`
   width: 340px;
   height: 340px;
   cursor: pointer;
 `;
+
+AlbumArtContainer.displayName = 'AlbumArtContainer';
 
 const ModalBackground = styled.div`
   background-color: rgba(242,242,242,0.9);
@@ -84,6 +103,8 @@ const ModalBackground = styled.div`
   justify-content: center;
 `;
 
+ModalBackground.displayName = 'ModalBackground';
+
 const GenreCreatedContainer = styled.div`
   margin-left: auto;
   margin-right: 20px;
@@ -91,17 +112,23 @@ const GenreCreatedContainer = styled.div`
   font-size: 16px;
 `;
 
+GenreCreatedContainer.displayName = 'GenreCreatedContainer';
+
 const CreatedAt = styled.div`
   margin-top: 16px;
   margin-bottom: 16px;
 `;
+
+CreatedAt.displayName = 'CreatedAt';
 
 const GenreContainer = styled.div`
   flex-direction: row;
   text-align: right;
 `;
 
-const keyFrameExampleOne = keyframes`
+GenreContainer.displayName = 'GenreContainer';
+
+const AlbumArtSlideDown = keyframes`
   0% {
     height: 1200px;
   }
@@ -118,12 +145,16 @@ const ModalContainer = styled.div`
 
 `;
 
+ModalContainer.displayName = 'ModalContainer';
+
 const BlowUpContainer = styled.div`
   background-color: white;
   padding: 30px 30px 30px 30px;
   flex-direction: column;
-  animation: ${keyFrameExampleOne} 0.35s ease-in-out 0s 1;
+  animation: ${AlbumArtSlideDown} 0.35s ease-in-out 0s 1;
 `;
+
+BlowUpContainer.displayName = 'ModalContainer';
 
 const Artist = styled.span`
   background-color: black;
@@ -138,6 +169,8 @@ const Artist = styled.span`
     color: white;
   }
 `;
+
+Artist.displayName = 'Artist';
 
 const Album = styled.span`
   background-color: black;
@@ -154,6 +187,8 @@ const Album = styled.span`
   }
 `;
 
+Album.displayName = 'Album'
+
 const ModalTitle = styled.div`
   padding: 0px 20px 15px 0px;
   overflow: false;
@@ -161,6 +196,8 @@ const ModalTitle = styled.div`
   border-bottom-style: solid;
   border-bottom-width: 1px;
 `;
+
+ModalTitle.displayName = 'ModalTitle'
 
 const Genre = styled.span`
   background: #999;
@@ -194,10 +231,14 @@ const Genre = styled.span`
   }
 `;
 
+Genre.displayName = 'Genre';
+
 const AlbumArt = styled.img`
   width: 340px;
   height: 340px;
 `;
+
+AlbumArt.displayName = 'AlbumArt';
 
 const AlbumArtThumb = styled.img`
   cursor: pointer;
@@ -205,11 +246,15 @@ const AlbumArtThumb = styled.img`
   height: 20px;
 `;
 
+AlbumArtThumb.displayName = 'AlbumArtThumb';
+
 const AlbumArtBlowUp = styled.img`
 padding-top 30px;
   width: 500px;
   height: 500px;
 `;
+
+AlbumArtBlowUp.displayName = 'AlbumArtThumb';
 
 const Title = styled.span`
   background-color: black;
@@ -220,15 +265,16 @@ const Title = styled.span`
   padding-right: 7px;
   padding-bottom: 4px;
   padding-left: 7px;
-
 `;
+
+Title.displayName = 'Title';
 
 class MusicPlayer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       currentSongData: {},
-      currentSongId: 1,
+      currentSongId: 3,
       play: false,
       showModal: false
     };
