@@ -19,13 +19,6 @@ describe('<MusicPlayer />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly', () => {
-    const wrapper = render(
-      <MusicPlayer />
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('MusicPlayer contains an artist component', () => {
     const wrapper = mount(
       <MusicPlayer />
