@@ -19,13 +19,7 @@ it('renders correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it('renders correctly', () => {
-  const wrapper = shallow(
-    <AlbumModal />
-  );
 
-  expect(wrapper).toMatchSnapshot();
-});
 
 // import puppeteer from 'puppeteer';
 
