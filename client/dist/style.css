@@ -1,20 +1,4 @@
 body{
   font-family: "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
-
 }
 
-#albumModal {
-	position: relative;
-	z-index: 999;
-}
-
-
-
-/*{
-	color: #FF5836;
-	background: orange;
-  border-radius: 50%;
-  height: .5em;
-  width: .5em;
-  line-height: 10%;
-}*/

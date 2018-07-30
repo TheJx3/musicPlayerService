@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import styled, { keyframes } from 'styled-components';
 import Moment from 'react-moment';
@@ -104,7 +103,7 @@ const GenreContainer = styled.div`
 
 const keyFrameExampleOne = keyframes`
   0% {
-    height: 900px;
+    height: 1200px;
   }
   80% {
     height: 580px;
@@ -115,11 +114,15 @@ const keyFrameExampleOne = keyframes`
   }
 `;
 
+const ModalContainer = styled.div`
+
+`;
+
 const BlowUpContainer = styled.div`
   background-color: white;
   padding: 30px 30px 30px 30px;
   flex-direction: column;
-  animation: ${keyFrameExampleOne} .1s ease-in-out 0s 1;
+  animation: ${keyFrameExampleOne} 0.35s ease-in-out 0s 1;
 `;
 
 const Artist = styled.span`
@@ -225,19 +228,18 @@ class MusicPlayer extends React.Component {
     super(props);
     this.state = {
       currentSongData: {},
-      currentSongId: 10,
+      currentSongId: 1,
       play: false,
       showModal: false
     };
     this.playButtonHandler = this.playButtonHandler.bind(this);
     this.albumArtClickHandler = this.albumArtClickHandler.bind(this);
-    this.hideModalHandler = this.hideModalHandler.bind(this)
+    this.hideModalHandler = this.hideModalHandler.bind(this);
   }
 
   componentDidMount () {
     this.getSongData(this.state.currentSongId);
-    console.log('this is the link', 'https://s3-us-west-1.amazonaws.com/streamboard98/music/' + this.state.currentSongData.songFile);
-    }
+  }
 
   getSongData (songId) {
     // GET request to fetch song data
@@ -250,70 +252,67 @@ class MusicPlayer extends React.Component {
 
   playButtonHandler () {
     // plays a static song
-    this.setState({play: !this.state.play});
+    this.setState({ play: !this.state.play });
     if (this.state.play === false) {
-      this.audio.play()
+      this.audio.play();
     } else {
-      this.audio.pause()
+      this.audio.pause();
     }
   }
 
   artistClickHandler () {
     // goes to a static a static artist page
-    this.state = this.state;
+    window.alert('This would go to the artist page if we had it implemented!');
   }
 
   albumClickHandler () {
     // goes to a static album page
-    this.state = this.state;
+    window.alert('This would go to the album page if we had it implemented!');
   }
 
   genreClickHandler () {
     // goes to a static genre page
-    this.state = this.state;
+    window.alert('This would go to the genre page if we had it implemented!')
   }
 
   albumArtClickHandler () {
-    // pops up the album art
     this.setState({ showModal: true });
-    console.log(this.state.showModal)
   }
 
-  hideModalHandler() {
-    this.setState({ showModal: false })
+  hideModalHandler () {
+    this.setState({ showModal: false });
   }
 
   render () {
     const modal = this.state.showModal ? (
       <AlbumModal>
         <ModalBackground className='modal' onClick={this.hideModalHandler}>
-        <div>
-          <BlowUpContainer>
-            <ModalTitle>{this.state.currentSongData.title}</ModalTitle>
-            <AlbumArtBlowUp src={`https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/${this.state.currentSongData.albumArt}`} ></AlbumArtBlowUp>
-          </BlowUpContainer>
-        </div>
+          <ModalContainer>
+            <BlowUpContainer>
+              <ModalTitle>{this.state.currentSongData.title}</ModalTitle>
+              <AlbumArtBlowUp src={`https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/${this.state.currentSongData.albumArt}`} ></AlbumArtBlowUp>
+            </BlowUpContainer>
+          </ModalContainer>
         </ModalBackground>
       </AlbumModal>
     ) : null;
 
-
     let playButton;
     if (this.state.play === false) {
-      playButton = 'https://s3-us-west-1.amazonaws.com/streamboard98/icons/play.png'
+      playButton = 'https://s3-us-west-1.amazonaws.com/streamboard98/icons/play.png';
     } else {
-      playButton = 'https://s3-us-west-1.amazonaws.com/streamboard98/icons/pause.png'
+      playButton = 'https://s3-us-west-1.amazonaws.com/streamboard98/icons/pause.png';
     }
     return (
       <MusicPlayerContainer>
-      {modal}
+        {modal}
         <ButtonTitleContainer>
           <PlayButtonContainer onClick={this.playButtonHandler}>
             <PlayButton src={playButton}></PlayButton>
           </PlayButtonContainer>
           <TitleArtistContainer>
             <ArtistContainer>
-              <Artist>
+              <Artist onClick={this.artistClickHandler}>
                 {this.state.currentSongData.artist}
               </Artist>
             </ArtistContainer>
@@ -324,7 +323,7 @@ class MusicPlayer extends React.Component {
             </TitleContainer>
             <AlbumContainer>
               <AlbumArtThumb src={`https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/${this.state.currentSongData.albumArt}`}></AlbumArtThumb>
-              <Album>
+              <Album onClick={this.albumClickHandler}>
                 In album: {this.state.currentSongData.album}
               </Album>
             </AlbumContainer>
@@ -333,7 +332,7 @@ class MusicPlayer extends React.Component {
         <GenreCreatedContainer>
           <GenreContainer>
             <CreatedAt><Moment fromNow>{this.state.currentSongData.createdAt}</Moment></CreatedAt>
-            <Genre>
+            <Genre onClick={this.genreClickHandler}>
               # {this.state.currentSongData.genre}
             </Genre>
           </GenreContainer>

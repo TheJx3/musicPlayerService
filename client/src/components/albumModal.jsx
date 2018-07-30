@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
-import styled from 'styled-components';
 
-const albumModal = document.getElementById('albumModal')
+const albumModal = document.getElementById('albumModal');
 
 class AlbumModal extends React.Component {
   constructor (props) {
