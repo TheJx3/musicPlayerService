@@ -19,12 +19,12 @@ describe('<MusicPlayer />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('MusicPlayer contains an artist component', () => {
-    const wrapper = mount(
-      <MusicPlayer />
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
+  // it('MusicPlayer contains an artist component', () => {
+  //   const wrapper = mount(
+  //     <MusicPlayer />
+  //   );
+  //   expect(wrapper).toMatchSnapshot();
+  // });
 
 it('Should load the page with the music initially not be playing', () => {
     const wrapper = shallow(
