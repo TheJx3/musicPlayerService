@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.div
+      onClick={[Function]}
+    >
+      <styled.img
+        src="https://s3-us-west-1.amazonaws.com/streamboard98/icons/play.png"
+      />
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.span
+          onClick={[Function]}
+        />
+      </styled.div>
+      <styled.div>
+        <styled.span />
+      </styled.div>
+      <styled.div>
+        <styled.img
+          src="https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/undefined"
+        />
+        <styled.span
+          onClick={[Function]}
+        >
+          In album: 
+        </styled.span>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.div>
+        <t
+          ago={false}
+          calendar={false}
+          decimal={false}
+          element="time"
+          filter={[Function]}
+          fromNow={true}
+          interval={60000}
+          onChange={[Function]}
+          toNow={false}
+          unit={null}
+          unix={false}
+          utc={false}
+        />
+      </styled.div>
+      <styled.span
+        onClick={[Function]}
+      >
+        # 
+      </styled.span>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    onClick={[Function]}
+  >
+    <styled.img
+      src="https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/undefined"
+    />
+  </styled.div>
+</styled.div>
+`;
