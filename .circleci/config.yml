@@ -26,9 +26,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: 
-      name: Switch timezone to Los_Angeles
-      command: sudo cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+      # - run: 
+      # name: Switch timezone to Los_Angeles
+      # command: sudo cp /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 
       - run: npm install
 
