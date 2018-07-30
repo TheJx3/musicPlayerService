@@ -15,8 +15,8 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     working_directory: ~/musicPlayerService
-      environment:
-        TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+      # environment:
+      #   TZ: "/usr/share/zoneinfo/America/Los_Angeles"
     
     steps:
       - checkout
