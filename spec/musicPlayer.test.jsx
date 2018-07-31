@@ -13,7 +13,7 @@ expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<MusicPlayer />', () => {
-  moment.tz.setDefault('Asia/Hovd')
+  // moment.tz.setDefault('Asia/Hovd')
 
   it('shallow renders correctly', () => {
     const wrapper = shallow(
@@ -22,29 +22,48 @@ describe('<MusicPlayer />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('MusicPlayer contains an artist component', () => {
-    const wrapper = mount(
-      <MusicPlayer />
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
+  // it('Renders a mounted version in the DOM', () => {
+  //   const wrapper = mount(
+  //     <MusicPlayer />
+  //   );
+  //   expect(wrapper).toMatchSnapshot();
+  // });
 
-it('Should load the page with the music initially not be playing', () => {
-    const wrapper = shallow(
-      <MusicPlayer />
-    );
+  it('Should load the page with the music initially not be playing', () => {
+    const wrapper = shallow(<MusicPlayer />);
+
     const playState = wrapper.state().play;
     expect(playState).toEqual(false);
   });
 
-it('Should load the page with the modal not showing', () => {
-    const wrapper = shallow(
-      <MusicPlayer />
-    );
+  it('Should load the page with the modal not showing', () => {
+    const wrapper = shallow(<MusicPlayer />);
+
     const modalState = wrapper.state().showModal;
     expect(modalState).toEqual(false);
   });
+
+  it('Should have node Album', () => {
+    const wrapper = shallow(<MusicPlayer />);
+    expect(wrapper.find('Album').exists()).toEqual(true);
+  });
+
+  it('Should have node Artist', () => {
+    const wrapper = shallow(<MusicPlayer />);
+    expect(wrapper.find('Artist').exists()).toEqual(true);
+  });
+
+  it('Should have node PlayButton', () => {
+    const wrapper = shallow(<MusicPlayer />);
+    expect(wrapper.find('PlayButton').exists()).toEqual(true);
+  });
+
+  it('Should have node AlbumArt', () => {
+    const wrapper = shallow(<MusicPlayer />);
+    expect(wrapper.find('AlbumArt').exists()).toEqual(true);
+  });
 });
+
 // import puppeteer from 'puppeteer';
 
 // const pageUrl = 'http://localhost:6969/';
