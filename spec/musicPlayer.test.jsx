@@ -108,8 +108,10 @@ describe('<MusicPlayer />', () => {
   });
 
   it('changes state of play when clicked', () => {
+    window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+    window.HTMLMediaElement.prototype.pause = () => { /* do nothing */ };
     const wrapper = mount(<MusicPlayer />);
-    wrapper.find('PlayButtonContainer').simulate('click')
+    wrapper.find('PlayButtonContainer').simulate('click');
     const playState = wrapper.state().play;
     expect(playState).toEqual(true);
   });
