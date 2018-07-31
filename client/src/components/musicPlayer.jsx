@@ -254,7 +254,7 @@ padding-top 30px;
   height: 500px;
 `;
 
-AlbumArtBlowUp.displayName = 'AlbumArtThumb';
+AlbumArtBlowUp.displayName = 'AlbumArtBlowUp';
 
 const Title = styled.span`
   background-color: black;
@@ -274,9 +274,10 @@ class MusicPlayer extends React.Component {
     super(props);
     this.state = {
       currentSongData: {},
-      currentSongId: 3,
+      currentSongId: 2,
       play: false,
-      showModal: false
+      showModal: false,
+      audio: new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/RickAstley_NeverGonnaGiveYouUp.mp3')
     };
     this.playButtonHandler = this.playButtonHandler.bind(this);
     this.albumArtClickHandler = this.albumArtClickHandler.bind(this);
@@ -290,20 +291,20 @@ class MusicPlayer extends React.Component {
   getSongData (songId) {
     // GET request to fetch song data
     $.get(`/api/songs/${songId}`, null, (data) => {
-      this.setState({ currentSongData: data });
+      this.setState({ currentSongData: data, audio:  new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/' + data.songFile)});
       document.title = this.state.currentSongData.title;
-      this.audio = new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/' + this.state.currentSongData.songFile);
+      // this.audio = new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/' + this.state.currentSongData.songFile);
     });
   }
 
   playButtonHandler () {
     // plays a static song
-    this.setState({ play: !this.state.play });
     if (this.state.play === false) {
-      this.audio.play();
+      this.state.audio.play();
     } else {
-      this.audio.pause();
+      this.state.audio.pause();
     }
+    this.setState({ play: !this.state.play });
   }
 
   artistClickHandler () {

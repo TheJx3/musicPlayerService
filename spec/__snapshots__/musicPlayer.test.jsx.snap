@@ -1,5 +1,289 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<MusicPlayer /> Should change the state of the modal back to false after clicking twice 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  background: linear-gradient(135deg,#4D586E,#3A67C0);
+  height: 340px;
+  width: 1200px;
+  margin: 0 auto;
+  color: white;
+  padding-top: 15px;
+  padding-left: 25px;
+  padding-bottom: 15px;
+  padding-right: 15px;
+}
+
+.c1 {
+  padding-top: 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c4 {
+  padding-left: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 400px;
+  font-weight: 100;
+}
+
+.c2 {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  border-radius: 50%;
+  border-color: #FF5836;
+  background: #FF5836;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.c2:hover {
+  background: #FF4137;
+}
+
+.c3 {
+  margin-left: 4.5px;
+  margin-top: 4px;
+  width: 50px;
+  height: 50px;
+}
+
+.c7 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c18 {
+  width: 340px;
+  height: 340px;
+  cursor: pointer;
+}
+
+.c13 {
+  margin-left: auto;
+  margin-right: 20px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+.c16 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.c15 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  text-align: right;
+}
+
+.c6 {
+  background-color: black;
+  font-size: 16px;
+  color: #ccc;
+  padding-top: 2px;
+  padding-right: 7px;
+  padding-bottom: 3px;
+  padding-left: 7px;
+  cursor: pointer;
+}
+
+.c5:hover .c6 {
+  color: white;
+}
+
+.c12 {
+  background-color: black;
+  font-size: 16px;
+  color: #ccc;
+  line-height: 1;
+  padding-top: 2px;
+  padding-right: 7px;
+  padding-bottom: 3px;
+  padding-left: 7px;
+  cursor: pointer;
+}
+
+.c9:hover .c12 {
+  color: white;
+}
+
+.c17 {
+  background: #999;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 20px;
+  border-top-color: rgb(153,153,153);
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-right-color: rgb(153,153,153);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-bottom-color: rgb(153,153,153);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: rgb(153,153,153);
+  border-left-style: solid;
+  border-left-width: 0;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  padding-top: 2px;
+  padding-right: 7px;
+  padding-bottom: 2px;
+  padding-left: 7px;
+}
+
+.c14:hover .c17 {
+  background: #666;
+  border-color: #666;
+}
+
+.c19 {
+  width: 340px;
+  height: 340px;
+}
+
+.c11 {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.c8 {
+  background-color: black;
+  font-size: 24px;
+  color: white;
+  line-height: 1.7;
+  padding-top: 4px;
+  padding-right: 7px;
+  padding-bottom: 4px;
+  padding-left: 7px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+      onClick={[Function]}
+    >
+      <img
+        className="c3"
+        src="https://s3-us-west-1.amazonaws.com/streamboard98/icons/play.png"
+      />
+    </div>
+    <div
+      className="c4"
+    >
+      <div
+        className="c5 "
+      >
+        <span
+          className="c6"
+          onClick={[Function]}
+        />
+      </div>
+      <div
+        className="c7"
+      >
+        <span
+          className="c8"
+        />
+      </div>
+      <div
+        className="c9 c10"
+      >
+        <img
+          className="c11"
+          src="https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/undefined"
+        />
+        <span
+          className="c12"
+          onClick={[Function]}
+        >
+          In album: 
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="c13"
+  >
+    <div
+      className="c14 c15"
+    >
+      <div
+        className="c16"
+      >
+        <time
+          dateTime={"2018-07-31T04:46:02.690Z"}
+        >
+          a few seconds ago
+        </time>
+      </div>
+      <span
+        className="c17"
+        onClick={[Function]}
+      >
+        # 
+      </span>
+    </div>
+  </div>
+  <div
+    className="c18"
+    onClick={[Function]}
+  >
+    <img
+      className="c19"
+      src="https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/undefined"
+    />
+  </div>
+</div>
+`;
+
 exports[`<MusicPlayer /> shallow renders correctly 1`] = `
 <MusicPlayerContainer>
   <ButtonTitleContainer>

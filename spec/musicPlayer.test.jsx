@@ -12,6 +12,8 @@ expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
 
 Enzyme.configure({ adapter: new Adapter() });
 
+jest.useFakeTimers()
+
 describe('<MusicPlayer />', () => {
   // moment.tz.setDefault('Asia/Hovd')
 
@@ -82,6 +84,34 @@ describe('<MusicPlayer />', () => {
     const wrapper = shallow(<MusicPlayer />);
     wrapper.find('Genre').simulate('click');
     expect(window.alert).toHaveBeenCalledWith('This would go to the genre page if we had it implemented!');
+  });
+
+  it('Should change the state of the modal back to false after clicking twice', () => {
+    const wrapper = shallow(<MusicPlayer />);
+    wrapper.find('AlbumArtContainer').simulate('click');
+    wrapper.find('ModalBackground').simulate('click');
+    const modalState = wrapper.state().showModal;
+    expect(modalState).toEqual(false);
+  });
+
+  it('Modal should not exist', () => {
+    const wrapper = shallow(<MusicPlayer />);
+    wrapper.find('AlbumArtContainer').simulate('click');
+    const modalState = wrapper.state().showModal;
+    expect(wrapper.find('AlbumModal').exists()).toEqual(true);
+  });
+
+  it('calls componentdidmount', () => {
+    sinon.spy(MusicPlayer.prototype, 'componentDidMount');
+    const wrapper = mount(<MusicPlayer />);
+    expect(MusicPlayer.prototype.componentDidMount.calledOnce).toEqual(true);
+  });
+
+  it('changes state of play when clicked', () => {
+    const wrapper = mount(<MusicPlayer />);
+    wrapper.find('PlayButtonContainer').simulate('click')
+    const playState = wrapper.state().play;
+    expect(playState).toEqual(true);
   });
 
 });
