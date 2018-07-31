@@ -56,11 +56,32 @@ describe('<MusicPlayer />', () => {
     expect(wrapper.find('AlbumArt').exists()).toEqual(true);
   });
 
-  it('Should have node Title', () => {
+  it('Should change state of show modal after a click', () => {
     const wrapper = shallow(<MusicPlayer />);
-    wrapper.find('AlbumArt').simulate('click');    
+    wrapper.find('AlbumArtContainer').simulate('click');
     const modalState = wrapper.state().showModal;
     expect(modalState).toEqual(true);
+  });
+
+  it('Should call window alert after a click on Artist', () => {
+    window.alert = jest.fn(()=>true);
+    const wrapper = shallow(<MusicPlayer />);
+    wrapper.find('Artist').simulate('click');
+    expect(window.alert).toHaveBeenCalledWith('This would go to the artist page if we had it implemented!');
+  });
+
+  it('Should call window alert after a click on Album', () => {
+    window.alert = jest.fn(()=>true);
+    const wrapper = shallow(<MusicPlayer />);
+    wrapper.find('Album').simulate('click');
+    expect(window.alert).toHaveBeenCalledWith('This would go to the album page if we had it implemented!');
+  });
+
+  it('Should call window alert after a click on genre', () => {
+    window.alert = jest.fn(()=>true);
+    const wrapper = shallow(<MusicPlayer />);
+    wrapper.find('Genre').simulate('click');
+    expect(window.alert).toHaveBeenCalledWith('This would go to the genre page if we had it implemented!');
   });
 
 });
