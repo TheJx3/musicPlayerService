@@ -2,3 +2,26 @@ body{
   font-family: "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
 }
 
+#container {
+	display: flex;
+	flex-direction: column;
+}
+
+#top {
+	position: relative;
+	width: 1200px;
+	margin: auto;
+	border-color: red;
+	border-width: 10px;
+}
+
+#bottom {
+	display: flex;
+	flex-direction: row;
+	width: 1200px;
+	justify-content: center;
+		border-color: red;
+		border-width: 10px;
+
+}
+

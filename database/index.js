@@ -48,5 +48,9 @@ const save = (err, inputSong) => {
   }
 };
 
+for (let i = 0; i < data.songs.length; i++) {
+  save(null, data.songs[i]);
+}
+
 module.exports.save = save;
 module.exports.getSong = getSong;
