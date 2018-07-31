@@ -1,4 +1,4 @@
 module.exports = {
-  collectCoverate: true,
-  collectCoverageFrom: ['src/**/*.{js,jsx}']
+  collectCoverage: true,
+  collectCoverageFrom: ['client/src/components/*.{js,jsx}']
 };
