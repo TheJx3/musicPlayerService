@@ -13,7 +13,7 @@ expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<MusicPlayer />', () => {
-  moment.tz.setDefault('Indian/Mauritius')
+  moment.tz.setDefault('Asia/Omsk')
 
   it('shallow renders correctly', () => {
     const wrapper = shallow(
