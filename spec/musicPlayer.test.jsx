@@ -22,13 +22,6 @@ describe('<MusicPlayer />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  // it('Renders a mounted version in the DOM', () => {
-  //   const wrapper = mount(
-  //     <MusicPlayer />
-  //   );
-  //   expect(wrapper).toMatchSnapshot();
-  // });
-
   it('Should load the page with the music initially not be playing', () => {
     const wrapper = shallow(<MusicPlayer />);
 
@@ -62,6 +55,14 @@ describe('<MusicPlayer />', () => {
     const wrapper = shallow(<MusicPlayer />);
     expect(wrapper.find('AlbumArt').exists()).toEqual(true);
   });
+
+  it('Should have node Title', () => {
+    const wrapper = shallow(<MusicPlayer />);
+    wrapper.find('AlbumArt').simulate('click');    
+    const modalState = wrapper.state().showModal;
+    expect(modalState).toEqual(true);
+  });
+
 });
 
 // import puppeteer from 'puppeteer';
