@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { createSerializer } from 'enzyme-to-json';
 import sinon from 'sinon';
 import 'jest-styled-components'
+import moment from 'moment-timezone'
 
 import MusicPlayer from '../client/src/components/musicPlayer';
 
@@ -12,6 +13,8 @@ expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<MusicPlayer />', () => {
+  moment.tz.setDefault('Europe/Volgograd')
+
   it('shallow renders correctly', () => {
     const wrapper = shallow(
       <MusicPlayer />
@@ -19,12 +22,12 @@ describe('<MusicPlayer />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  // it('MusicPlayer contains an artist component', () => {
-  //   const wrapper = mount(
-  //     <MusicPlayer />
-  //   );
-  //   expect(wrapper).toMatchSnapshot();
-  // });
+  it('MusicPlayer contains an artist component', () => {
+    const wrapper = mount(
+      <MusicPlayer />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 
 it('Should load the page with the music initially not be playing', () => {
     const wrapper = shallow(
