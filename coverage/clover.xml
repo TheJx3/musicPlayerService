@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1533015558124" clover="3.2.0">
-  <project timestamp="1533015558124" name="All files">
+<coverage generated="1533018280632" clover="3.2.0">
+  <project timestamp="1533018280632" name="All files">
     <metrics statements="76" coveredstatements="68" conditionals="6" coveredconditionals="5" methods="15" coveredmethods="10" elements="97" coveredelements="83" complexity="0" loc="76" ncloc="76" packages="1" files="2" classes="2">
       <file name="albumModal.jsx" path="/Users/ringosanchez/Desktop/musicPlayerService/client/src/components/albumModal.jsx">
         <metrics statements="6" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
