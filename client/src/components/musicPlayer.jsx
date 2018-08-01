@@ -274,7 +274,7 @@ class MusicPlayer extends React.Component {
     super(props);
     this.state = {
       currentSongData: {},
-      currentSongId: 2,
+      currentSongId: 1,
       play: false,
       showModal: false,
       audio: new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/RickAstley_NeverGonnaGiveYouUp.mp3')
@@ -285,15 +285,15 @@ class MusicPlayer extends React.Component {
   }
 
   componentDidMount () {
-    this.getSongData(this.state.currentSongId);
+    let currentSongIdGet = global.window.location.pathname.substring(7);
+    this.getSongData(currentSongIdGet);
   }
 
   getSongData (songId) {
     // GET request to fetch song data
-    $.get(`/api/songs/${songId}`, null, (data) => {
-      this.setState({ currentSongData: data, audio:  new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/' + data.songFile)});
+    $.get(`http://localhost:6969/songs/${songId}`, null, (data) => {
+      this.setState({ currentSongData: data, audio: new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/' + data.songFile)});
       document.title = this.state.currentSongData.title;
-      // this.audio = new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/' + this.state.currentSongData.songFile);
     });
   }
 

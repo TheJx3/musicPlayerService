@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { createSerializer } from 'enzyme-to-json';
 import sinon from 'sinon';
 import 'jest-styled-components'
-import moment from 'moment-timezone'
+// import moment from 'moment-timezone'
 
 import MusicPlayer from '../client/src/components/musicPlayer';
 
