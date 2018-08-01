@@ -4,14 +4,14 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/streamboard98/suggestedTracksService
+  - https://github.com/streamboard98/waveFormService
+  - https://github.com/streamboard98/commentsListAndSubmissionsService
+  - https://github.com/streamboard98/musicPlayerService
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Usage](npm install)
 1. [Requirements](#requirements)
 1. [Development](#development)
 
