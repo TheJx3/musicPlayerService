@@ -5,8 +5,9 @@ import Moment from 'react-moment';
 import AlbumModal from './albumModal.jsx';
 
 const MusicPlayerContainer = styled.div`
+  font-family: "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   justify-content: flex-end;
   background: linear-gradient(135deg, #4D586E, #3A67C0);
   height: 340px;
@@ -101,6 +102,7 @@ const ModalBackground = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
 `;
 
 ModalBackground.displayName = 'ModalBackground';
@@ -352,7 +354,6 @@ class MusicPlayer extends React.Component {
     }
     return (
       <MusicPlayerContainer>
-        {modal}
         <ButtonTitleContainer>
           <PlayButtonContainer onClick={this.playButtonHandler}>
             <PlayButton src={playButton}></PlayButton>
@@ -387,6 +388,7 @@ class MusicPlayer extends React.Component {
         <AlbumArtContainer onClick={this.albumArtClickHandler}>
           <AlbumArt src={`https://s3-us-west-1.amazonaws.com/streamboard98/albumCovers/${this.state.currentSongData.albumArt}`}></AlbumArt>
         </AlbumArtContainer>
+
       </MusicPlayerContainer>
     );
   }
