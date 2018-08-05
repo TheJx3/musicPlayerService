@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  musicplayer:
+    image: musicplayer
+    depends_on:
+      - 'database'
+    build: .
+    environment:
+      NODE_ENV: production
+    ports: 
+      - '6969:6969'
+
+  proxy:
+    image: proxy
+    depends_on:
+      - 'musicplayer'
+    build: ../musicPlayerProxy/.
+    environment:
+      NODE_ENV: production
+    ports: 
+      - '3223:3223'
+
+
+  database:
+    image: mongo:latest
+
+    

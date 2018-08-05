@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const data = require('../sampleData.js');
 
-const connection = mongoose.connect('mongodb://localhost/musicPlayer', { useMongoClient: true });
+const connection = mongoose.connect('mongodb+srv:ringo196:hackreactor@musicplayer-vp5xs.mongodb.net/test?retryWrites=true')
 
-console.log('GRRRREEAAAAT SUCCESSSSS!!!!!');
+console.log('MONGOOSE CONNECTED!@!@!@! GRRRREEAAAAT SUCCESSSSS!!!!!');
 
 const songSchema = mongoose.Schema({
   _id: Number,
@@ -48,10 +48,10 @@ const save = (err, inputSong) => {
   }
 };
 
-// // Uncomment this to upload data to the db
-// for (let i = 0; i < data.songs.length; i++) {
-//   save(null, data.songs[i]);
-// }
+  // // uncomment this to populate db
+  //   for (let i = 0; i < data.songs.length; i++) {
+  //     save(null, data.songs[i]);
+  //   }
 
 module.exports.save = save;
 module.exports.getSong = getSong;

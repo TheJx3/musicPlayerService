@@ -275,7 +275,7 @@ class MusicPlayer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      currentSongData: {},
+      currentSongData: { albumArt: 'RickAstley_WheneverYouNeedSomebody.png' },
       currentSongId: 1,
       play: false,
       showModal: false,
@@ -287,13 +287,13 @@ class MusicPlayer extends React.Component {
   }
 
   componentDidMount () {
-    let currentSongIdGet = global.window.location.pathname.substring(7);
+    const currentSongIdGet = global.window.location.pathname.substring(7);
     this.getSongData(currentSongIdGet);
   }
 
   getSongData (songId) {
     // GET request to fetch song data
-    $.get(`http://localhost:6969/songs/${songId}`, null, (data) => {
+    $.get(`http://ec2-18-222-239-157.us-east-2.compute.amazonaws.com/songs/${songId}`, null, (data) => {
       this.setState({ currentSongData: data, audio: new Audio('https://s3-us-west-1.amazonaws.com/streamboard98/music/' + data.songFile)});
       document.title = this.state.currentSongData.title;
     });
@@ -332,10 +332,10 @@ class MusicPlayer extends React.Component {
     this.setState({ showModal: false });
   }
 
-  render () {
+  render () { 
     const modal = this.state.showModal ? (
       <AlbumModal>
-        <ModalBackground className='modal' onClick={this.hideModalHandler}>
+        <ModalBackground className="modal" onClick={this.hideModalHandler}>
           <ModalContainer>
             <BlowUpContainer>
               <ModalTitle>{this.state.currentSongData.title}</ModalTitle>
