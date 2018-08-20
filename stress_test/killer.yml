@@ -1,0 +1,39 @@
+config:
+  target: "http://localhost:7111"
+  phases:
+    - duration: 20
+      arrivalRate: 2
+    - duration: 60
+      arrivalRate: 5
+      # rampTo: 10
+    - duration: 100
+      arrivalRate: 10
+  processor: "./randomData.js"
+scenarios:
+  - name: "Find song"
+    weight: 49
+    flow:
+      - loop:
+        - function: "generateRandomData"
+        - get:
+            url: "/songs/{{ songId }}"
+        # - think: 1
+        count: 50
+  - name: "Submit song"
+    weight: 1
+    flow:
+      - loop:
+        - function: "generateRandomData"
+        - post :
+            url: "/api/songs/"
+            json:
+              title: "{{ title }}"
+              artist: "{{ artist }}"
+              genre: "{{ title }}"
+              album: "{{ title }}"
+              albumart: "{{ url }}"
+              songfile: "{{ url }}"
+              createdat: "{{ songId }}"
+        - log: "Target ID {{ songId }} executed"
+        # - think: 1
+        count: 50
