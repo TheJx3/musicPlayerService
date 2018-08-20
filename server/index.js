@@ -1,10 +1,14 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-// const db = require('../database/index.js');
+const redis = require('redis');
+
 const app = express();
 const port = 7111;
+
+const client = redis.createClient();
 
 const cassandraDB = require('../database/cassandra.js');
 app.use(cors());
@@ -17,7 +21,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api/songs/:id', (req, res) => {
+app.get('/songs/:id', (req, res) => {
   let selectedTrackId = req.params.id;
   const query = 'SELECT * FROM songs WHERE id=?';
   // console.log('db client',cassandraDB.client);
@@ -49,7 +53,7 @@ app.post('/api/songs/', (req, res) => {
     req.body.createdat
   ]
   console.log('request received');
-  const query = 'INSERT INTO songs(id,title,artist,genre,album,albumArt,songFile,createdAt) VALUES (?,?,?,?,?,?,?,?)';
+  const query = 'INSERT INTO songs(id,title,artist,genre,album,albumArt,songFile,createdAt) VALUES (?,?,?,?,?,?,?,?) using ttl 30';
   cassandraDB.client.execute(query, song, { prepare : true })
     .then(() => res.send('POST request to db'))
     .catch(err => res.status(500).send({msg:err}));
@@ -60,7 +64,6 @@ app.put('/api/songs/:id/:prop', (req, res) => {
   let propToUpdate = req.params.prop;
   let value = req.body.value;
   let query = `UPDATE soundofcloud.songs SET ${propToUpdate} = ? WHERE id = ?`
-  console.log(typeof propToUpdate);
   cassandraDB.client.execute(query, [ value, selectedTrackId ], { prepare : true })
   .then(() => res.send('POST request to db'))
   .catch(err => res.status(500).send({msg:err}));
