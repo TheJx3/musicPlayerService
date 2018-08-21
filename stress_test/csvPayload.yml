@@ -4,15 +4,15 @@ config:
     - duration: 5
       arrivalRate: 20
     - duration: 30
-      arrivalRate: 200
-      rampTo: 300
+      arrivalRate: 20
+      rampTo: 200
       name: "Warmup"
-    - duration: 60
-      arrivalRate: 300
-      rampTo: 100
+    - duration: 30
+      arrivalRate: 200
+      rampTo: 600
       name: "Ramping up arrival rate"
-    - duration: 100
-      arrivalRate: 1600
+    - duration: 40
+      arrivalRate: 900
       name: "Final load phase"
   payload:
     path: "payload.csv"
