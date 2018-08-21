@@ -4,13 +4,15 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const redis = require('redis');
+const cassandraDB = require('../database/cassandra.js');
 
 const app = express();
 const port = 7111;
 
+//Redis client
 const client = redis.createClient();
+client.on('connect', () => console.log('Connected to Redis...'))
 
-const cassandraDB = require('../database/cassandra.js');
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -23,11 +25,42 @@ app.use((req, res, next) => {
 
 app.get('/songs/:id', (req, res) => {
   let selectedTrackId = req.params.id;
-  const query = 'SELECT * FROM songs WHERE id=?';
-  // console.log('db client',cassandraDB.client);
-  cassandraDB.client.execute(query, [ selectedTrackId ], { prepare : true })
-  .then(result => res.send(result.rows[0]))
-    .catch(err => res.status(404).send({msg:err}));
+
+  client.hgetall(selectedTrackId, (err, storedSong) => {
+    if (!storedSong) {
+      // check db for value on db
+      //Cassandra call
+      const query = 'SELECT * FROM songs WHERE id=?';
+      // console.log('db client',cassandraDB.client);
+      cassandraDB.client.execute(query, [ selectedTrackId ], { prepare : true })
+      .then(result => {
+        let song = result.rows[0];
+        let redisStorageVal = [
+          'id', song.id,
+          'title', song.title,
+          'artist', song.artist,
+          'genre', song.genre,
+          'album', song.album,
+          'alumart', song.albumart,
+          'songfile', song.songfile,
+          'createdat', song.createdat
+        ];
+        client.hset(selectedTrackId, redisStorageVal, (err, res) => {
+          if (err) {
+            console.log('there was an error storing on reddis', err);
+          } else {
+            console.log('stored in redis');
+          }
+        });
+        res.send(song);
+      }).catch(err => res.status(404).send({msg:err}));
+    } else {
+      console.log('Retrieved from Redis');
+      res.send(storedSong);
+    };
+      // store on redis
+      //if its still not there, send an error.
+  })
 });
 
 const idGenerator = () => {
