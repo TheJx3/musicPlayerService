@@ -45,13 +45,25 @@ app.get('/songs/:id', (req, res) => {
           'songfile', song.songfile,
           'createdat', song.createdat
         ];
-        client.hset(selectedTrackId, redisStorageVal, (err, res) => {
-          if (err) {
-            console.log('there was an error storing on reddis', err);
-          } else {
-            console.log('stored in redis');
-          }
-        });
+        client.multi()
+          .hset(selectedTrackId, redisStorageVal)
+          .expire(selectedTrackId, 400)
+          .exec((err, res) => {
+            if (err) {
+              console.log('there was an error storing on reddis', err);
+            } else {
+              console.log('stored in redis');
+              console.log(JSON.stringify(res, null, 2));
+            }
+            // client.end();
+          })
+        // client.hset(selectedTrackId, redisStorageVal, (err, res) => {
+        //   if (err) {
+        //     console.log('there was an error storing on reddis', err);
+        //   } else {
+        //     console.log('stored in redis');
+        //   }
+        // });
         res.send(song);
       }).catch(err => res.status(404).send({msg:err}));
     } else {
@@ -72,24 +84,28 @@ const idGenerator = () => {
 
 let generateID = idGenerator();
 
+client.set('id', 10000001);
+
 app.post('/api/songs/', (req, res) => {
   // id,title,artist,genre,album,albumArt,songFile,createdAt
-
-  let song = [
-    generateID(),
-    req.body.title,
-    req.body.artist,
-    req.body.genre,
-    req.body.album,
-    req.body.albumart,
-    req.body.songfile,
-    req.body.createdat
-  ]
-  console.log('request received');
-  const query = 'INSERT INTO songs(id,title,artist,genre,album,albumArt,songFile,createdAt) VALUES (?,?,?,?,?,?,?,?) using ttl 30';
-  cassandraDB.client.execute(query, song, { prepare : true })
-    .then(() => res.send('POST request to db'))
-    .catch(err => res.status(500).send({msg:err}));
+  client.get('id', (err, id) => {
+    let song = [
+      id,
+      req.body.title,
+      req.body.artist,
+      req.body.genre,
+      req.body.album,
+      req.body.albumart,
+      req.body.songfile,
+      req.body.createdat
+    ];
+    client.incr('id');
+    console.log('request received', id);
+    const query = 'INSERT INTO songs(id,title,artist,genre,album,albumArt,songFile,createdAt) VALUES (?,?,?,?,?,?,?,?) using ttl 30';
+    cassandraDB.client.execute(query, song, { prepare : true })
+      .then(() => res.send('POST request to db'))
+      .catch(err => res.status(500).send({msg:err}));
+  })
 });
 
 app.put('/api/songs/:id/:prop', (req, res) => {
