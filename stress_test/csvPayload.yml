@@ -1,0 +1,69 @@
+config:
+  target: "http://localhost:7111"
+  phases:
+    - duration: 5
+      arrivalRate: 20
+    - duration: 30
+      arrivalRate: 200
+      rampTo: 300
+      name: "Warmup"
+    - duration: 60
+      arrivalRate: 300
+      rampTo: 100
+      name: "Ramping up arrival rate"
+    - duration: 100
+      arrivalRate: 1600
+      name: "Final load phase"
+  payload:
+    path: "payload.csv"
+    fields:
+      - "id"
+      - "title"
+      - "artist"
+      - "genre"
+      - "album"
+      - "albumart"
+      - "songfile"
+      - "createdat"
+scenarios:
+  - name: "Find song"
+    weight: 49
+    flow:
+      # - loop:
+        # - function: "generateRandomData"
+        - get:
+            url: "/songs/{{ id }}"
+        # count: 50
+  - name: "Submit song"
+    weight: 1
+    flow:
+      # - loop:
+        # - function: "generateRandomData"
+        - post :
+            url: "/api/songs/"
+            json:
+              title: "{{ title }}"
+              artist: "{{ artist }}"
+              genre: "{{ genre }}"
+              album: "{{ album }}"
+              albumart: "{{ albumart }}"
+              songfile: "{{ songfile }}"
+              createdat: "{{ createdat }}"
+        - log: "Target ID {{ id }} executed"
+        # count: 50
+# scenarios:
+#   - name: "Search and buy"
+#     flow:
+#       - post:
+#           url: "/search"
+#           body: "kw={{ keywords }}"
+#           capture:
+#             json: "$.results[0].id"
+#             as: "id"
+#       - get:
+#           url: "/details/{{ id }}"
+#       - think: 3
+#       - post:
+#           url: "/cart"
+#           json:
+#             productId: "{{ id }}"
