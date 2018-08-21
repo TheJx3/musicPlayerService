@@ -28,7 +28,7 @@ app.get('/songs/:id', (req, res) => {
 
   client.hgetall(selectedTrackId, (err, storedSong) => {
     if (!storedSong) {
-      // check db for value on db
+      // check db for value
       //Cassandra call
       const query = 'SELECT * FROM songs WHERE id=?';
       // console.log('db client',cassandraDB.client);
@@ -50,28 +50,17 @@ app.get('/songs/:id', (req, res) => {
           .expire(selectedTrackId, 400)
           .exec((err, res) => {
             if (err) {
-              console.log('there was an error storing on reddis', err);
+              console.log('Error storing on redis', err);
             } else {
-              console.log('stored in redis');
-              console.log(JSON.stringify(res, null, 2));
+              console.log('Stored in redis');
             }
-            // client.end();
           })
-        // client.hset(selectedTrackId, redisStorageVal, (err, res) => {
-        //   if (err) {
-        //     console.log('there was an error storing on reddis', err);
-        //   } else {
-        //     console.log('stored in redis');
-        //   }
-        // });
         res.send(song);
       }).catch(err => res.status(404).send({msg:err}));
     } else {
       console.log('Retrieved from Redis');
       res.send(storedSong);
     };
-      // store on redis
-      //if its still not there, send an error.
   })
 });
 
