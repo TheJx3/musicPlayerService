@@ -3,26 +3,38 @@ version: '3'
 services:
   musicplayer:
     image: musicplayer
+    build: .
     depends_on:
       - 'database'
-    build: .
+      - 'redis'
     environment:
       NODE_ENV: production
     ports: 
-      - '6969:6969'
-
-  proxy:
-    image: proxy
-    depends_on:
-      - 'musicplayer'
-    build: ../musicPlayerProxy/.
-    environment:
-      NODE_ENV: production
-    ports: 
-      - '3223:3223'
-
+      - 80:7111
+    restart: on-failure
 
   database:
-    image: mongo:latest
+    container_name: cassandra
+    image: cassandra:latest
+    volumes: 
+      - ./database:/var/lib/cassandra
+    healthcheck:
+      test: ["CMD", "cqlsh", "-u cassandra", "-p cassandra" ,"-e describe keyspaces"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
 
-    
+  cassandra-load-keyspace:
+      container_name: cassandra-load-keyspace
+      image: cassandra:latest
+      depends_on:
+        - database
+      restart: on-failure
+      volumes:
+        - ./database/init.cql:/schema.cql
+      command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /schema.cql"
+
+  redis:
+    image: redis:latest
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis

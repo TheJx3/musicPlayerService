@@ -1,5 +1,5 @@
 const cassandra = require('cassandra-driver');
-const client = new cassandra.Client({contactPoints:['127.0.0.1'], keyspace: 'soundofcloud'});
+const client = new cassandra.Client({contactPoints:['database'], keyspace: 'soundofcloud'});
 
 const query0 = 'INSERT INTO users (username, password) values (?,?)';
 

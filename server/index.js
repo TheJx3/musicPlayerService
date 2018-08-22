@@ -10,7 +10,7 @@ const app = express();
 const port = 7111;
 
 //Redis client
-const client = redis.createClient();
+const client = redis.createClient({host: 'redis'});
 client.on('connect', () => console.log('Connected to Redis...'))
 
 app.use(cors());
