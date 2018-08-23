@@ -25,14 +25,14 @@ services:
       retries: 10
 
   cassandra-load-keyspace:
-      container_name: cassandra-load-keyspace
-      image: cassandra:latest
-      depends_on:
-        - database
-      restart: on-failure
-      volumes:
-        - ./database/init.cql:/schema.cql
-      command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /schema.cql"
+    container_name: cassandra-load-keyspace
+    image: cassandra:latest
+    depends_on:
+      - database
+    restart: on-failure
+    volumes:
+      - ./database/init.cql:/schema.cql
+    command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /schema.cql"
 
   redis:
     image: redis:latest
