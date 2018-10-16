@@ -1,116 +1,31 @@
-# Project Name
-
-> Project description
-
-Create
-POST /songs/:id
-{
-    _id: Number,
-  title: String,
-  artist: String,
-  genre: String,
-  album: String,
-  albumArt: String,
-  songFile: String,
-  createdAt: Number
-}
-
-Read
-GET /songs/:id
-{
-  _id: Number,
-  title: String,
-  artist: String,
-  genre: String,
-  album: String,
-  albumArt: String,
-  songFile: String,
-  createdAt: Number
-}
-
-Update
-PUT /songs/:id/title/:title
-{
-  _id: Number,
-  title: String,
-}
-
-PUT /songs/:id/artist/:artist
-{
-  _id: Number,
-  artist: String,
-}
-
-PUT /songs/:id/genre/:genre
-{
-  _id: Number,
-  genre: String,
-}
-
-PUT /songs/:id/album/:album
-{
-  _id: Number,
-  album: String,
-}
-
-PUT /songs/:id/albumart/:albumArt
-{
-  _id: Number,
-  albumArt: String,
-}
-
-PUT /songs/:id/songfile/:songFile
-{
-  _id: Number,
-  songFile: String,
-}
-
-PUT /songs/:id/createdat/:createdat
-{
-  _id: Number,
-  createdAt: Number,
-}
-
-
-Delete
-DELETE songs/:id
-{
-  _id: Number,
-}
+# TravelInn: A Mock HostelWorld Reviews Module
+I refactored legacy code for the back end of a mock HostelWorld reviews module.
 
 ## Related Projects
 
-  - https://github.com/TheJx3/suggestedTracksService
-  - https://github.com/TheJx3/commentsListAndSubmissionsService
-  - https://github.com/TheJx3/musicPlayerService
+  - https://github.com/airBnC/calendar-module
+  - https://github.com/TravelInn/Overview
+  - https://github.com/TravelInn/Header
+
 
 ## Table of Contents
 
-1. [Usage](npm install)
-1. [Requirements](#requirements)
-1. [Development](#development)
+1. [Description](#Description)
+1. [Requirements](#Requirements)
 
-## Usage
+## Description
+ I loaded the database with 10M primary records. Through Nginx load balancer and Redis caching, I was able to reach +2800RPS with <100ms latency.
 
-> Some usage instructions
+ Using loader.io and New Relic, I load tested my data and found that it could handle only about 100RPS. After additional configuration and refactoring, I was able to get to +2800 RPS. Ask me about the project!
 
 ## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
+### To Run This Module
 From within the root directory:
+npm run start
 
-```sh
-npm install -g webpack
-npm install
-```
-
-# videoPlayerSkeletonService
-# videoPlayerSkeletonService
+## Images
+> Nginx load balancer used.
+### Without Redis caching:
+![noRedis](./images/noredis.png)<!-- .element height="50%" width="50%" -->
+### With Redis caching:
+![redis](./images/redis.png)<!-- .element height="50%" width="50%" -->
