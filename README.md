@@ -16,7 +16,7 @@ I refactored legacy code for the back end of a mock HostelWorld reviews module.
 ## Description
  I loaded the database with 10M primary records. Through Nginx load balancer and Redis caching, I was able to reach +2800RPS with <100ms latency.
 
- Using loader.io and New Relic, I load tested my data and found that it could handle only about 100RPS. After additional configuration and refactoring, I was able to get to +2800 RPS. Ask me about the project!
+ Using loader.io and New Relic, I load tested my data and found that it could handle only about 100RPS. After additional configuration and refactoring, I was able to get to +1500 RPS. Ask me about the project!
 
 ## Requirements
 ### To Run This Module
