@@ -3,9 +3,8 @@ I refactored legacy code for the back end of a mock HostelWorld reviews module.
 
 ## Related Projects
 
-  - https://github.com/airBnC/calendar-module
-  - https://github.com/TravelInn/Overview
-  - https://github.com/TravelInn/Header
+  - https://github.com/TheJx3/suggestedTracksService
+  - https://github.com/TheJx3/commentsListAndSubmissionService
 
 
 ## Table of Contents
